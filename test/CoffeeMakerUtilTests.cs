@@ -43,15 +43,6 @@ namespace aws.Tests
         }
 
         [Fact]
-        public async Task Test_RunAsync_Has_Different_Threads()
-        {
-            var log = await _sut.RunAsync();
-            var threads = log.Get().Select(x => x.Thread);
-            var result = threads.Distinct().Count() > 1;
-            Assert.True(result);
-        }
-
-        [Fact]
         public async Task Test_RunAsync_Has_The_Correct_Order_For_Kettle()
         {
             var log = await _sut.RunAsync();
