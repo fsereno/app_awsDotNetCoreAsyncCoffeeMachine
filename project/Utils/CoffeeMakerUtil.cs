@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Interfaces;
 using Models;
@@ -12,6 +9,7 @@ namespace Utils
     {
         private Log _log;
 
+        /// <inheritdoc/>
         public Log Run()
         {
             _log = new Log();
@@ -35,9 +33,10 @@ namespace Utils
             return _log;
         }
 
+        /// <inheritdoc/>
         public async Task<Log> RunAsync()
         {
-            _log = new Log(); // instead of returning a flat log, how about a log and hide the list using enumerators ?
+            _log = new Log();
 
             var boilingWaterTask = this.StartAsync("boiling the kettle", 3000);
             this.Do("get coffee from cupboard");
@@ -60,6 +59,7 @@ namespace Utils
             return _log;
         }
 
+        /// <inheritdoc/>
         public async Task<bool> StartAsync(string instruction, int seconds)
         {
             _log.Add(new LogItem($"Start {instruction.ToLower()}", Thread.CurrentThread.ManagedThreadId));
@@ -68,6 +68,7 @@ namespace Utils
             return true;
         }
 
+        /// <inheritdoc/>
         public void Start(string instruction, int seconds)
         {
             _log.Add(new LogItem($"Start {instruction.ToLower()}", Thread.CurrentThread.ManagedThreadId));
@@ -75,6 +76,7 @@ namespace Utils
             _log.Add(new LogItem($"Finished {instruction.ToLower()}", Thread.CurrentThread.ManagedThreadId));
         }
 
+        /// <inheritdoc/>
         public void Do(string instruction)
         {
             var detail = char.ToUpper(instruction[0])+instruction.Substring(1);
