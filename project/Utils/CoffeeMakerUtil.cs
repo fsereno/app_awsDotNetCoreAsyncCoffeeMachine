@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Interfaces;
 using Models;
 
@@ -8,11 +9,18 @@ namespace Utils
     public class CoffeeMakerUtil : ITaskRunner
     {
         private Log _log;
+        private readonly ILogger<CoffeeMakerUtil> _logger;
+
+        public CoffeeMakerUtil(ILogger<CoffeeMakerUtil> logger)
+        {
+            _logger = logger;
+        }
 
         /// <inheritdoc/>
         public Log Run()
         {
             _log = new Log();
+            _logger.LogInformation("Starting synchronous process");
 
             this.Start("boiling the kettle", 3000);
             this.Do("get coffee from cupboard");
@@ -30,6 +38,8 @@ namespace Utils
             this.Do("stir coffee");
             this.Do("drink coffee");
 
+            _logger.LogInformation("Ending synchronous process");
+
             return _log;
         }
 
@@ -37,6 +47,7 @@ namespace Utils
         public async Task<Log> RunAsync()
         {
             _log = new Log();
+            _logger.LogInformation("Starting asynchronous process");
 
             var boilingWaterTask = this.StartAsync("boiling the kettle", 3000);
             this.Do("get coffee from cupboard");
@@ -55,6 +66,8 @@ namespace Utils
             this.Do("pour coffee into cup");
             this.Do("stir coffee");
             this.Do("drink coffee");
+
+            _logger.LogInformation("Ending asynchronous process");
 
             return _log;
         }

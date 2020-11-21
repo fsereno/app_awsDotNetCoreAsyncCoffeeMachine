@@ -1,8 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using aws;
+using Microsoft.Extensions.Logging;
+using Moq;
 using Utils;
 using Models;
 using Xunit;
@@ -12,9 +12,12 @@ namespace aws.Tests
     public class CoffeeMakerUtilTests
     {
         private readonly CoffeeMakerUtil _sut;
+
+        private readonly Mock<ILogger<CoffeeMakerUtil>> _logger;
         public CoffeeMakerUtilTests()
         {
-            _sut = new CoffeeMakerUtil();
+            _logger = new Mock<ILogger<CoffeeMakerUtil>>();
+            _sut = new CoffeeMakerUtil(_logger.Object);
         }
 
         [Fact]
@@ -60,6 +63,22 @@ namespace aws.Tests
             Assert.True(true);
         }
 
+        [Fact]
+        public void TestRunVerifyLogging()
+        {
+            var log = _sut.Run();
+            VerifyLogger(LogLevel.Information, "Starting synchronous process");
+            VerifyLogger(LogLevel.Information, "Ending synchronous process");
+        }
+
+        [Fact]
+        public async Task TestRunAsyncVerifyLogging()
+        {
+            var log = await _sut.RunAsync();
+            VerifyLogger(LogLevel.Information, "Starting asynchronous process");
+            VerifyLogger(LogLevel.Information, "Ending asynchronous process");
+        }
+
         private (int IndexOfFirstTask, int IndexOfSecondTask) GetIndexOfOrderedTasks(Log log, string detailOfFirstItem, string detailOfSecondItem)
         {
             var indexOfFirstTask = 0;
@@ -80,6 +99,17 @@ namespace aws.Tests
                 i++;
             }
             return (indexOfFirstTask, indexOfSecondTask);
+        }
+
+        private void VerifyLogger(LogLevel expectedLogLevel, string expectedMessage = "")
+        {
+            _logger.Verify(
+                x => x.Log(
+                    It.Is<LogLevel>(l => l == expectedLogLevel),
+                    It.IsAny<EventId>(),
+                    It.Is<It.IsAnyType>((v, t) => String.IsNullOrEmpty(expectedMessage) ? true : v.ToString() == expectedMessage),
+                    It.IsAny<Exception>(),
+                    It.Is<Func<It.IsAnyType, Exception, string>>((v, t) => true)));
         }
     }
 }
