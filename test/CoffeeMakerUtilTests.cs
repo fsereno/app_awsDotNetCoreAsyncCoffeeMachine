@@ -64,7 +64,7 @@ namespace aws.Tests
         }
 
         [Fact]
-        public void TestRunVerifyLogging()
+        public void Test_Run_Verify_Logging()
         {
             var log = _sut.Run();
             VerifyLogger(LogLevel.Information, "Starting synchronous process");
@@ -72,7 +72,7 @@ namespace aws.Tests
         }
 
         [Fact]
-        public async Task TestRunAsyncVerifyLogging()
+        public async Task Test_Run_Async_Verify_Logging()
         {
             var log = await _sut.RunAsync();
             VerifyLogger(LogLevel.Information, "Starting asynchronous process");
