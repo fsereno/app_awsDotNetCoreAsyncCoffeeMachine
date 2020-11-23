@@ -19,7 +19,6 @@ namespace aws.Controllers
         [HttpGet("RunAsync")]
         public async Task<List<LogItem>> RunAsync()
         {
-            SetResponseHeaders();
             Log log;
 
             try
@@ -36,7 +35,6 @@ namespace aws.Controllers
         [HttpGet("Run")]
         public List<LogItem> Run()
         {
-            SetResponseHeaders();
             Log log;
 
             try
@@ -48,12 +46,6 @@ namespace aws.Controllers
                 throw new Exception("Unable to run process: " + exception.Message);
             }
             return log?.Get();
-        }
-
-        private void SetResponseHeaders() {
-            Response.Headers.Add("Access-Control-Allow-Methods", "GET");
-            Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token");
-            Response.Headers.Add("Access-Control-Allow-Origin", "*");
         }
     }
 }

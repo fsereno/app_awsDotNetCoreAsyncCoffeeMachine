@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,6 +45,8 @@ namespace aws
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseMiddleware<SecurityHeadersMiddleware>();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -54,6 +57,24 @@ namespace aws
             {
                 endpoints.MapControllers();
             });
+        }
+    }
+
+    public sealed class SecurityHeadersMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public SecurityHeadersMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
+
+        public Task Invoke(HttpContext context)
+        {
+            context.Response.Headers.Add("Access-Control-Allow-Methods", "GET");
+            context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token");
+            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            return _next(context);
         }
     }
 }
