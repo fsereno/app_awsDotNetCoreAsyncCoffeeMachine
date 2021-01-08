@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Interfaces;
-using Utils;
+using FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Interfaces;
+using FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Utils;
 
 namespace aws
 {

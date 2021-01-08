@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Models
+namespace FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Models
 {
     public class Log : IEnumerable
     {

@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Interfaces;
-using Models;
+using FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Interfaces;
+using FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Models;
 
-namespace Utils
+namespace FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Utils
 {
     public class CoffeeMakerUtil : ITaskRunner
     {

@@ -1,4 +1,4 @@
-﻿namespace Models
+﻿namespace FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Models
 {
     public class LogItem
     {

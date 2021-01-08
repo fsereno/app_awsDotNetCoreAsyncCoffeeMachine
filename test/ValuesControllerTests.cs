@@ -4,8 +4,9 @@ using Xunit;
 using Amazon.Lambda.TestUtilities;
 using Amazon.Lambda.APIGatewayEvents;
 using Newtonsoft.Json;
+using aws;
 
-namespace aws.Tests
+namespace FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Tests
 {
     public class ValuesControllerTests
     {

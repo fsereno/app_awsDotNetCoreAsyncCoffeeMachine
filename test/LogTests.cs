@@ -1,13 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using aws;
-using Utils;
-using Models;
+using FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Models;
 using Xunit;
 
-namespace aws.Tests
+namespace FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Tests
 {
     public class LogTests
     {

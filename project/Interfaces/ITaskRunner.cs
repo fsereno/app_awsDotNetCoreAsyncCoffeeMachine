@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Models;
+using FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Models;
 
-namespace Interfaces
+namespace FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Interfaces
 {
     public interface ITaskRunner
     {

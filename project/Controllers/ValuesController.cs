@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Interfaces;
-using Models;
+using FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Interfaces;
+using FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Models;
 
-namespace aws.Controllers
+namespace FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase

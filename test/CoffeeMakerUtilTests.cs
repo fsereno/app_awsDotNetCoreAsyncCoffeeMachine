@@ -3,11 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Utils;
-using Models;
+using FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Utils;
+using FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Models;
 using Xunit;
 
-namespace aws.Tests
+namespace FabioSereno.App_awsDotNetCoreAsyncCoffeeMachine.Tests
 {
     public class CoffeeMakerUtilTests
     {
